@@ -4,6 +4,12 @@ spring:
     username: root
     password: admin
     driver-class-name: com.mysql.jdbc.Driver
+  thymeleaf:
+    mode: HTML5
+    encoding: UTF-8
+    servlet:
+      content-type: text/html
+    cache: false
 
 
 mybatis:
