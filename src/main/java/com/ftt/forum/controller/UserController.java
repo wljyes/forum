@@ -15,12 +15,13 @@ public class UserController {
     @Autowired
     UserMapper userMapper;
 
+
     @PostMapping("/user/login")
     public String login(String name, String password, HttpSession session, Model model) {
         User user = userMapper.selectByName(name);
-        if (user == null || !user.getPassword().equals(password)) {
+        if (user != null && user.getPassword().equals(password)) {
             session.setAttribute("user", user);
-            return "index";
+            return "redirect:/index";
         }
         session.setAttribute("user", null);
         model.addAttribute("error", "用户名或密码错误");
@@ -35,7 +36,7 @@ public class UserController {
             user.setName(name);
             user.setPassword(password);
             userMapper.insert(user);
-            return "redirect:login";
+            return "redirect:/login";
         }
         model.addAttribute("error", "用户名已存在");
         return "register";

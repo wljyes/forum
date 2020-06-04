@@ -1,13 +1,26 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <title>hello</title>
+    <title>登录</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-<!--<p th:text="${name}" >name</p>-->
-<!--<p th:text="'Hello！ ' + ${name} + '!'" >hello world</p>-->
-<!--<p th:text="|Hello！ ${name}!|" >hello world</p>-->
+<div>
+    <form method="post" action="/user/login">
+        <label for="name">用户名</label>
+        <br>
+        <input id="name" name="name" type="text">
+        <br>
+        <label for="password">密码</label>
+        <br>
+        <input id="password" name="password" type="password">
+        <br>
+        <button type="submit">登录</button>
+    </form>
+    <p th:if="${error}">
+        <span th:text="${error}"></span>
+    </p>
+</div>
 </body>
 
 </html>
