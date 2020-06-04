@@ -1,0 +1,23 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/forum?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    username: root
+    password: admin
+    driver-class-name: com.mysql.jdbc.Driver
+
+
+mybatis:
+  mapper-locations: classpath:mapper/*Mapper.xml
+  type-aliases-package: com.whh.wxmini.pojo.entity
+
+#showSql
+logging:
+  level:
+    com:
+      example:
+        mapper: debug
+        wx: debug
+
+server:
+  port: 8080
+
