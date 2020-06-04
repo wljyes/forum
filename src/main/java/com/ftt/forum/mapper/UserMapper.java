@@ -7,10 +7,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserMapper {
 
-    @Insert("insert into user (name, password) values (#{name}, #{password})")
     @Options(useGeneratedKeys = true, keyProperty = "id")
+    @Insert("insert into user (name, password) values (#{name}, #{password})")
     void insert(User user);
-
 
     @Delete("delete from user where id = #{id}")
     void delete(Integer id);
@@ -23,4 +22,5 @@ public interface UserMapper {
 
     @Select("select * from user where name = #{name}")
     User selectByName(String name);
+
 }
