@@ -2,7 +2,7 @@ package com.ftt.forum.entity;
 
 import java.util.Date;
 
-public class Collect {
+public class Collect {//收藏
 
     private Integer id;
     private Integer pid;

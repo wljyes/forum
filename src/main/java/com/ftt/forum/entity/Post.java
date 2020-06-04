@@ -2,7 +2,7 @@ package com.ftt.forum.entity;
 
 import java.util.Date;
 
-public class Post {
+public class Post {//发帖
 
     private Integer id;
     private Integer uid;

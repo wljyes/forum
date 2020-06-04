@@ -13,13 +13,13 @@ public interface UserMapper {
 
 
     @Delete("delete from user where id = #{id}")
-    void delete(int id);
+    void delete(Integer id);
 
     @Update("update user set name = #{name}, password = #{password} where id = #{id}")
     void update(User user);
 
     @Select("select id, name, password from user where id = #{id}")
-    User selectById(int id);
+    User selectById(Integer id);
 
     @Select("select * from user where name = #{name}")
     User selectByName(String name);

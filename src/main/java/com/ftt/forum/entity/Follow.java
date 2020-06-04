@@ -2,7 +2,7 @@ package com.ftt.forum.entity;
 
 import java.util.Date;
 
-public class Follow {
+public class Follow {//关注
 
     private Integer id;
     private Integer uid;

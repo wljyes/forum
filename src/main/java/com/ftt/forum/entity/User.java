@@ -1,6 +1,6 @@
 package com.ftt.forum.entity;
 
-public class User {
+public class User {//用户
     private Integer id;
     private String name;
     private String password;

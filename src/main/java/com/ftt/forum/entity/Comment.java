@@ -2,7 +2,7 @@ package com.ftt.forum.entity;
 
 import java.util.Date;
 
-public class Comment {
+public class Comment {//评论
 
     private Integer id;
     private Integer pid;
