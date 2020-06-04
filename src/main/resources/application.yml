@@ -7,15 +7,15 @@ spring:
 
 
 mybatis:
-  type-aliases-package: com.whh.wxmini.pojo.entity
+  type-aliases-package: com.ftt.forum.entity
 
 #showSql
 logging:
   level:
     com:
-      example:
-        mapper: debug
-        wx: debug
+      ftt:
+        forum:
+          mapper: debug
 
 server:
   port: 8080
