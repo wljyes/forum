@@ -19,7 +19,7 @@ public interface UserMapper {
     void update(User user);
 
     @Select("select id, name, password from user where id = #{id}")
-    void selectById(int id);
+    User selectById(int id);
 
     @Select("select * from user where name = #{name}")
     User selectByName(String name);
