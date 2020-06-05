@@ -3,22 +3,20 @@
 <html lang="zh" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>关注</title>
+    <title>follower</title>
 </head>
 <body>
-<h1>我关注了谁</h1>
-<div id="followList">
+<h1>谁关注了我</h1>
+<div id="followerList">
     <table>
         <thead>
         <tr>
             <th>用户名</th>
-            <th>取消关注</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="follow: ${follows}">
-            <td><a th:text="${follow.follower.name}" th:href="@{'/userinfo?uid=' + ${follow.follower_id}}"></a> </td>
-            <td><button><a th:href="@{'/unfollow?id=' + ${follow.id}}">取消关注</a></button></td>
+            <td><a th:text="${follow.user.name}" th:href="@{'/userinfo?uid=' + ${follow.uid}}"></a> </td>
         </tr>
         </tbody>
     </table>
