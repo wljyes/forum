@@ -26,11 +26,10 @@ public class FollowController {
     public String followList(HttpSession session, Model model) {
         User user = (User) session.getAttribute("user");
         List<Follow> follows = followMapper.selectByUid(user.getId());
-        List<User> followUsers = new ArrayList<>();
         for (Follow follow : follows) {
-            User followUser = userMapper.selectById(follow.getFollower_id());
+            follow.setFollower(userMapper.selectById(follow.getFollower_id()));
         }
-        model.addAttribute("followUsers", followUsers);
+        model.addAttribute("follows", follows);
         return "followList";
     }
 
@@ -38,11 +37,10 @@ public class FollowController {
     public String followerList(HttpSession session, Model model) {
         User user = (User) session.getAttribute("user");
         List<Follow> follows = followMapper.selectByFollowerId(user.getId());
-        List<User> followers = new ArrayList<>();
         for (Follow follow : follows) {
-            followers.add(userMapper.selectById(follow.getUid()));
+            follow.setUser(userMapper.selectById(follow.getUid()));
         }
-        model.addAttribute("followers", followers);
+        model.addAttribute("follows", follows);
         return "followerList";
     }
 

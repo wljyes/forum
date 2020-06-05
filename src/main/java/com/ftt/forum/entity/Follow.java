@@ -8,6 +8,24 @@ public class Follow {//关注
     private Integer uid;
     private Integer follower_id;
     private Date follow_date;
+    private User user;
+    private User follower;
+
+    public User getFollower() {
+        return follower;
+    }
+
+    public void setFollower(User follower) {
+        this.follower = follower;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public Integer getId() {
         return id;

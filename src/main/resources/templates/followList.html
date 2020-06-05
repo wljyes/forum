@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<!--suppress ALL-->
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>关注</title>
+</head>
+<body>
+<div id="followList">
+    <table>
+        <thead>
+        <tr>
+            <th>用户名</th>
+            <th>取消关注</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="follow: ${follows}">
+            <td><a th:text="${follow.follower.name}" th:href="@{'/userinfo?uid=' + ${follow.follower_id}}"></a> </td>
+            <td><button><a th:href="@{'/unfollow?id=' + ${follow.id}}">取消关注</a></button></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
