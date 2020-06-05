@@ -6,7 +6,31 @@
 </head>
 <body>
 <h1>用户信息</h1>
-<h1 th:text="${}"></h1>
+<br>
+<h2>用户名：</h2>
+<h2 th:text="${user.name}"></h2>
+<br>
+<h2>帖子：</h2>
+<div>
+    <table>
+        <thead>
+        <tr>
+           <th>ID</th>
+           <th>帖子</th>
+            <th>发帖时间</th>
+            <th>更新时间</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr th:each="post: ${posts}">
+                <td th:text="${post.id}"></td>
+                <td><a th:text="${post.content}" th:href=""></a> </td>
+                <td th:text="${post.create_date}"></td>
+                <td th:text="${post.update_date}"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 <!--<p th:text="${name}" >name</p>-->
 <!--<p th:text="'Hello！ ' + ${name} + '!'" >hello world</p>-->
 <!--<p th:text="|Hello！ ${name}!|" >hello world</p>-->
