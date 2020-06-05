@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!--suppress ALL -->
 <html lang="zh" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
@@ -14,8 +15,17 @@
                 <td><a th:text="${comment.user.name}" th:href="@{'/userinfo?uid=' + ${comment.uid}}"></a> </td>
                 <td th:text="${comment.content}"></td>
                 <td th:text="${comment.create_date}"></td>
+                <td th:if="${session.user.id == comment.user.id}"><a th:href="@{'/uncomment?id=' + ${comment.id} + '&pid=' + ${post.id}}">取消评论</a> </td>
             </tr>
         </table>
     </div>
+
+<div>
+    <form method="post" action="/addComment">
+        <input th:value="${post.id}" name="pid" type="hidden">
+        <textarea id="content" name="content"></textarea>
+        <button type="submit">回复</button>
+    </form>
+</div>
 </body>
 </html>
