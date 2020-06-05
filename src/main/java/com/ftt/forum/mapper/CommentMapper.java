@@ -16,7 +16,7 @@ public interface CommentMapper {
     void insert(Comment comment);
 
     @Delete("delete from comment where id = #{id}")
-    void delete(Integer pid);
+    void delete(Integer id);
 
     @Select("select * from comment where pid = #{pid} ")
     List<Comment> select(Integer pid);

@@ -7,6 +7,7 @@ import com.ftt.forum.mapper.CommentMapper;
 import com.ftt.forum.mapper.PostMapper;
 import com.ftt.forum.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@Controller
 public class CommentController {
 
     @Autowired
@@ -29,11 +31,13 @@ public class CommentController {
     public String  addComment(int pid, String content, HttpSession session){
         User user = (User) session.getAttribute("user");
         Comment comment = new Comment();
+        //设置uid
+        comment.setUid(user.getId());
         comment.setPid(pid);
         comment.setContent(content);
         comment.setCreate_date(new Date());
         commentMapper.insert(comment);
-        return "addComment";
+        return "redirect:commentList?pid=" + pid;
     }
 
     @GetMapping("/uncomment")
