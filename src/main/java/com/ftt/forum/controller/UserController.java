@@ -26,7 +26,7 @@ public class UserController {
         User user = userMapper.selectByName(name);
         if (user != null && user.getPassword().equals(password)) {
             session.setAttribute("user", user);
-            return "redirect:/index";
+            return "redirect:/postList";
         }
         session.setAttribute("user", null);
         model.addAttribute("error", "用户名或密码错误");

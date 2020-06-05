@@ -22,7 +22,7 @@
         </thead>
         <tbody>
             <tr th:each="post: ${posts}">
-                <td><a th:text="${post.content}" th:href=""></a> </td>
+                <td><a th:text="${post.content}" ></a> </td>
                 <td th:text="${post.create_date}"></td>
                 <td th:text="${post.update_date}"></td>
             </tr>

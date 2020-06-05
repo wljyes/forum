@@ -32,6 +32,7 @@ public class PostController {
         Date now = new Date();
         post.setCreate_date(now);
         post.setUpdate_date(now);
+        postMapper.insert(post);
         return  "redirect:postList";
     }
 
