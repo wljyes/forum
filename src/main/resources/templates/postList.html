@@ -6,6 +6,11 @@
     <title>帖子列表</title>
 </head>
 <body>
+<div id="user-panel">
+    <h2>Hi, <a th:href="@{'/userinfo?uid=' + ${user.id}}" th:text="${user.name}"></a> </h2>
+    <h2><a th:href="@{'/followList'}">我关注了谁</a> </h2>
+    <h2><a href="/followerList">谁关注了我</a> </h2>
+</div>
 <div id="postList">
     <table>
         <thead>

@@ -10,6 +10,13 @@
 <h2>用户名：</h2>
 <h2 th:text="${user.name}"></h2>
 <br>
+
+<div>
+    <form action="/follow" method="post">
+        <input name="follower_id" th:value="${user.id}" type="hidden">
+        <button type="submit">关注ta</button>
+    </form>
+</div>
 <h2>帖子：</h2>
 <div>
     <table>
@@ -29,6 +36,8 @@
         </tbody>
     </table>
 </div>
+
+
 </body>
 
 </html>

@@ -52,17 +52,19 @@ public class PostController {
      * @return 在服务端渲染用 model 渲染 postList.html, 并把渲染后的html返回个浏览器
      */
     @GetMapping("/postList")
-    public String postList(Model model) {
+    public String postList(Model model, HttpSession session) {
+        User user = (User) session.getAttribute("user");
         //从数据库查询出post
         List<Post> posts = postMapper.selectList();
         //给每一个post设置对应的user对象
         for (Post post : posts) {
             //由post的uid从数据库查询对应的User，并传给post
-            User user = userMapper.selectById(post.getUid());
-            post.setUser(user);
+            User postUser = userMapper.selectById(post.getUid());
+            post.setUser(postUser);
         }
         //将取得的posts传给模板做渲染，每个post都包含user,可以在渲染时使用用户信息
         model.addAttribute("posts", posts);
+        model.addAttribute("user", user);
         return "postList";
     }
 }
