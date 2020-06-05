@@ -2,13 +2,11 @@ package com.ftt.forum.controller;
 
 import com.ftt.forum.entity.Follow;
 import com.ftt.forum.entity.User;
-import com.ftt.forum.mapper.FollowMapper;
 import com.ftt.forum.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
