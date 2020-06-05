@@ -1,6 +1,8 @@
 package com.ftt.forum.controller;
 
+import com.ftt.forum.entity.Post;
 import com.ftt.forum.entity.User;
+import com.ftt.forum.mapper.PostMapper;
 import com.ftt.forum.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,11 +11,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 public class UserController {
     @Autowired
     UserMapper userMapper;
+    @Autowired
+    PostMapper postMapper;
 
 
     @PostMapping("/user/login")
@@ -40,5 +45,15 @@ public class UserController {
         }
         model.addAttribute("error", "用户名已存在");
         return "register";
+    }
+
+    @GetMapping("/userinfo")
+    public String userinfo(int uid, Model model) {
+        User user = userMapper.selectById(uid);
+        user.setPassword(null);
+        List<Post> posts = postMapper.selectByUid(uid);
+        model.addAttribute("user", user);
+        model.addAttribute("posts", posts);
+        return "userinfo";
     }
 }

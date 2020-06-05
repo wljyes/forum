@@ -10,17 +10,23 @@ import java.util.List;
 @Repository
 public interface PostMapper {
 
+    @Insert("insert into post (uid, create_date, update_date, content) values (#{uid}, #{create_date}, #{update_date}, #{content})")
     @Options(useGeneratedKeys = true, keyProperty = "id")
-    @Insert("insert into post (id, uid, create_date, update_date, content) values (#{id}, #{uid}, #{create_date}, #{update_date}, #{content})")
     void insert(Post post);
 
+
     @Delete("delete from post where id = #{id}")
-    void delete(Integer id);
+    void delete(int id);
+
+    @Update("update post set update_date = #{update_date} where id = #{id}")
+    void updateDate(Post post);
 
     @Select("select * from post where id = #{id}")
-    Post selectById(Integer id);
+    Post selectById(int id);
 
-    @Select("select * from post")
-    List<Post> select();
+    @Select("select * from post order by update_date desc")
+    List<Post> selectList();
 
+    @Select("select * from post where uid = #{uid} order by create_date desc")
+    List<Post> selectByUid(int uid);
 }
