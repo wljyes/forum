@@ -41,16 +41,17 @@ public class CommentController {
     }
 
     @GetMapping("/uncomment")
-    public String uncomment(int id){
+    public String uncomment(int id, int pid){
         commentMapper.delete(id);
-        return "redirect:commentList";
+        return "redirect:commentList?pid=" + pid;
     }
 
     @GetMapping("/commentList")
     public  String commentList(int pid, Model model){
         Post post = postMapper.selectById(pid);
-        List<Comment> comments = commentMapper.select(pid);
+        post.setUser(userMapper.selectById(post.getUid()));
 
+        List<Comment> comments = commentMapper.select(pid);
         for (Comment comment : comments)
         {
             User user = userMapper.selectById(comment.getUid());
