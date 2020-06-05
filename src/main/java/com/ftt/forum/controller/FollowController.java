@@ -44,7 +44,7 @@ public class FollowController {
             followers.add(userMapper.selectById(follow.getUid()));
         }
         model.addAttribute("followers", followers);
-        return "followers";
+        return "followerList";
     }
 
     @GetMapping("/unfollow")
