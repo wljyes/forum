@@ -24,7 +24,7 @@
         <tbody>
             <tr th:each="post: ${posts}">
                 <td><a th:text="${post.user.name}" th:href="@{'/userinfo?uid=' + ${post.user.id}}"></a> </td>
-                <td th:text="${post.content}"></td>
+                <td><a th:text="${post.content}" th:href="@{'/commentList?pid=' + ${post.id}}"></a></td>
                 <td th:text="${post.create_date}"></td>
                 <td th:text="${post.update_date}"></td>
             </tr>
