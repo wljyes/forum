@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface CommentMapper {
 
-    @Insert("insert into comment (pid, uid, create_date, content values (#{pid}, #{uid}, #{create_date}, #{content})")
+    @Insert("insert into comment (pid, uid, create_date, content) values (#{pid}, #{uid}, #{create_date}, #{content})")
     void insert(Comment comment);
 
     @Delete("delete from comment where id = #{id}")

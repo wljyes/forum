@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>帖子列表</title>
+</head>
+<body>
+<div id="postList">
+    <table>
+        <thead>
+            <tr>
+                <th>发帖者</th>
+                <th>帖子</th>
+                <th>发帖时间</th>
+                <th>更新时间</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="post: ${posts}">
+                <td th:text="${post.user.name}"></td>
+                <td th:text="${post.content}"></td>
+                <td th:text="${post.create_date}"></td>
+                <td th:text="${post.update_date}"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div>
+    <form action="/addPost" method="post">
+        <textarea id="content" name="content"></textarea>
+        <button type="submit">发帖</button>
+    </form>
+</div>
+</body>
+</html>

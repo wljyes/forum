@@ -9,6 +9,15 @@ public class Post {//发帖
     private Date create_date;
     private Date update_date;
     private String content;
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public Integer getId() {
         return id;
