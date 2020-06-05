@@ -15,7 +15,7 @@ public interface CommentMapper {
     @Insert("insert into comment (pid, uid, create_date, content values (#{pid}, #{uid}, #{create_date}, #{content})")
     void insert(Comment comment);
 
-    @Delete("delete from comment where pid = #{pid}")
+    @Delete("delete from comment where id = #{id}")
     void delete(Integer pid);
 
     @Select("select * from comment where pid = #{pid} ")
