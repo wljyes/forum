@@ -26,4 +26,7 @@ public interface PostMapper {
 
     @Select("select * from post order by update_date desc")
     List<Post> selectList();
+
+    @Select("select * from post where uid = #{uid} order by create_date desc")
+    List<Post> selectByUid(int uid);
 }
