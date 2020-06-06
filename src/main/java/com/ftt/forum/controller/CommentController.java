@@ -62,7 +62,7 @@ public class CommentController {
     }
 
     @GetMapping("/commentList")
-    public  String commentList(int pid, Model model){
+    public String commentList(int pid, Model model){
         Post post = postMapper.selectById(pid);
         post.setUser(userMapper.selectById(post.getUid()));
 
