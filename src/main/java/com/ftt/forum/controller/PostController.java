@@ -68,7 +68,8 @@ public class PostController {
             post.setCommentCount(commentMapper.selectCountByPid(post.getId()));
 
             //postList中每个post只用显示前100个字, 点进post才显示完整内容
-            post.setContent(post.getContent().substring(0, 100));
+            String contentSlice = post.getContent().length() > 100 ? post.getContent().substring(0, 100) : post.getContent();
+            post.setContent(contentSlice);
         }
         //将取得的posts传给模板做渲染，每个post都包含user,可以在渲染时使用用户信息
         model.addAttribute("posts", posts);
