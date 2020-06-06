@@ -10,6 +10,15 @@ public class Post {//发帖
     private Date update_date;
     private String content;
     private User user;
+    private int commentCount;
+
+    public int getCommentCount() {
+        return commentCount;
+    }
+
+    public void setCommentCount(int commentCount) {
+        this.commentCount = commentCount;
+    }
 
     public User getUser() {
         return user;

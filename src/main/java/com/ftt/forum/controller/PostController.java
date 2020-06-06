@@ -1,7 +1,9 @@
 package com.ftt.forum.controller;
 
+import com.ftt.forum.entity.Comment;
 import com.ftt.forum.entity.Post;
 import com.ftt.forum.entity.User;
+import com.ftt.forum.mapper.CommentMapper;
 import com.ftt.forum.mapper.PostMapper;
 import com.ftt.forum.mapper.UserMapper;
 import javafx.geometry.Pos;
@@ -22,6 +24,8 @@ public class PostController {
     PostMapper postMapper;
     @Autowired
     UserMapper userMapper;
+    @Autowired
+    CommentMapper commentMapper;
 
     /**
      * 发送新贴子, 发送完书跳转到 /postList
@@ -61,6 +65,7 @@ public class PostController {
             //由post的uid从数据库查询对应的User，并传给post
             User postUser = userMapper.selectById(post.getUid());
             post.setUser(postUser);
+            post.setCommentCount(commentMapper.selectCountByPid(post.getId()));
         }
         //将取得的posts传给模板做渲染，每个post都包含user,可以在渲染时使用用户信息
         model.addAttribute("posts", posts);

@@ -22,4 +22,7 @@ public interface CommentMapper {
 
     @Select("select * from comment where pid = #{pid} ")
     List<Comment> select(Integer pid);
+
+    @Select("select count(*) from comment where pid = #{pid}")
+    int selectCountByPid(int pid);
 }

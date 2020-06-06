@@ -19,6 +19,7 @@
                 <th>帖子</th>
                 <th>发帖时间</th>
                 <th>更新时间</th>
+                <th>回复数</th>
             </tr>
         </thead>
         <tbody>
@@ -27,6 +28,7 @@
                 <td><a th:text="${post.content}" th:href="@{'/commentList?pid=' + ${post.id}}"></a></td>
                 <td th:text="${post.create_date}"></td>
                 <td th:text="${post.update_date}"></td>
+                <td th:text="${post.commentCount}"></td>
             </tr>
         </tbody>
     </table>
