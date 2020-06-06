@@ -8,6 +8,7 @@
 <body>
     <h2><a th:text="${post.user.name}" th:href="@{'/userinfo?uid=' + ${post.user.id}}"></a> </h2>
     <h2 th:text="${post.content}"></h2>
+    <span><a th:href="@{'/addCollect?pid=' + ${post.id}}">加入收藏</a> </span>
 ------------------------------------------------------------
     <div id="commentList">
         <table>
