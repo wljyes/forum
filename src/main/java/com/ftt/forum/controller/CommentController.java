@@ -8,6 +8,8 @@ import com.ftt.forum.mapper.PostMapper;
 import com.ftt.forum.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,6 +30,7 @@ public class CommentController {
     UserMapper userMapper;
 
     @PostMapping("/addComment")
+    @Transactional
     public String  addComment(int pid, String content, HttpSession session){
         User user = (User) session.getAttribute("user");
         Comment comment = new Comment();
@@ -35,8 +38,20 @@ public class CommentController {
         comment.setUid(user.getId());
         comment.setPid(pid);
         comment.setContent(content);
-        comment.setCreate_date(new Date());
-        commentMapper.insert(comment);
+        Date now = new Date();
+        comment.setCreate_date(now);
+
+        Post post = new Post();
+        post.setId(pid);
+        post.setUpdate_date(now);
+        //事务
+        try {
+            commentMapper.insert(comment);
+            postMapper.updateDate(post);
+        } catch (Exception e) {
+            //回滚事务
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+        }
         return "redirect:commentList?pid=" + pid;
     }
 
