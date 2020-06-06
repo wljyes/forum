@@ -19,5 +19,5 @@ public interface CollectMapper {
     void  delete(Integer id);
 
     @Select("select * from collect where id = #{id}")
-    void selectById(Integer id);
+    Collect selectById(Integer id);
 }
