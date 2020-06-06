@@ -8,6 +8,8 @@ import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface CollectMapper {
 
@@ -19,5 +21,5 @@ public interface CollectMapper {
     void  delete(Integer id);
 
     @Select("select * from collect where id = #{id}")
-    Collect selectById(Integer id);
+    List<Collect> selectById(Integer id);
 }
