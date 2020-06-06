@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
@@ -24,14 +24,14 @@ public class CollectController {
     @Autowired
     PostMapper postMapper;
 
-    @PostMapping("/addCollect")
+    @RequestMapping("/addCollect")
     @ResponseBody
     public String addCollect(int pid, HttpSession session){
         User user = (User) session.getAttribute("user");
         Collect collect = new Collect();
         collect.setUid(user.getId());
         collect.setPid(pid);
-        collect.setCreate_date(new Date());
+        collect.setCollect_date(new Date());
         collectMapper.insert(collect);
         return  "success";
     }
@@ -50,6 +50,7 @@ public class CollectController {
             Post post = postMapper.selectById(collect.getPid());
             collect.setPost(post);
         }
+        model.addAttribute("user", user);
         model.addAttribute("collects",collects);
         return "collectList";
     }

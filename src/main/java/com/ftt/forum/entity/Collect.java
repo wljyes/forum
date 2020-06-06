@@ -7,7 +7,7 @@ public class Collect {//收藏
     private Integer id;
     private Integer pid;
     private Integer uid;
-    private Date create_date;
+    private Date collect_date;
     private User user;
     private Post post;
 
@@ -51,12 +51,12 @@ public class Collect {//收藏
         this.uid = uid;
     }
 
-    public Date getCreate_date() {
-        return create_date;
+    public Date getCollect_date() {
+        return collect_date;
     }
 
-    public void setCreate_date(Date create_date) {
-        this.create_date = create_date;
+    public void setCollect_date(Date collect_date) {
+        this.collect_date = collect_date;
     }
 
 }
