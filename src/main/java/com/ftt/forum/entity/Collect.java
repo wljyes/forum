@@ -8,7 +8,6 @@ public class Collect {//收藏
     private Integer pid;
     private Integer uid;
     private Date create_date;
-    private String content;
 
     public Integer getId() {
         return id;
@@ -42,11 +41,4 @@ public class Collect {//收藏
         this.create_date = create_date;
     }
 
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
 }
