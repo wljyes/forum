@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<!--suppress ALL-->
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>收藏列表</title>
+</head>
+<body>
+<div id="user-panel">
+    <h2>Hi, <a th:href="@{'/userinfo?uid=' + ${user.id}}" th:text="${user.name}"></a> </h2>
+    <h2><a th:href="@{'/followList'}">我关注了谁</a> </h2>
+    <h2><a href="/followerList">谁关注了我</a> </h2>
+</div>
+<div id="collectList">
+    <table>
+        <thead>
+        <tr>
+            <th>帖子</th>
+            <th>收藏时间</th>
+            <th>取消收藏</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="collect: ${collects}">
+            <td><a th:text="${collect.post.content}" th:href="@{'/commentList?pid=' + ${collect.post.id}}"></a></td>
+            <td th:text="${collect.create_date}"></td>
+            <td><a th:href="@{'/uncollect?id=' + ${collect.id}}">取消收藏</a> </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

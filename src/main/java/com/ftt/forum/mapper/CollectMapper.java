@@ -21,5 +21,8 @@ public interface CollectMapper {
     void  delete(Integer id);
 
     @Select("select * from collect where id = #{id}")
-    List<Collect> selectById(Integer id);
+    Collect selectById(Integer id);
+
+    @Select("select * from collect where uid = #{uid} order by collect_date desc")
+    List<Collect> selectByUid(int uid);
 }
