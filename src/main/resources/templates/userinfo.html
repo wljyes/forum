@@ -30,8 +30,8 @@
         <tbody>
             <tr th:each="post: ${posts}">
                 <td><a th:text="${post.content}" th:href="@{'/commentList?pid=' + ${post.id}}"></a> </td>
-                <td th:text="${post.create_date}"></td>
-                <td th:text="${post.update_date}"></td>
+                <td th:text="${#dates.format(post.create_date, 'dd/MM/yyyy HH:mm')}"></td>
+                <td th:text="${#dates.format(post.update_date, 'dd/MM/yyyy HH:mm')}"></td>
             </tr>
         </tbody>
     </table>
