@@ -44,14 +44,7 @@ public class CommentController {
         Post post = new Post();
         post.setId(pid);
         post.setUpdate_date(now);
-        //事务
-        try {
-            commentMapper.insert(comment);
-            postMapper.updateDate(post);
-        } catch (Exception e) {
-            //回滚事务
-            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-        }
+        commentMapper.insert(comment);
         return "redirect:commentList?pid=" + pid;
     }
 

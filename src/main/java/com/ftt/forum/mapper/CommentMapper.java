@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -25,4 +26,8 @@ public interface CommentMapper {
 
     @Select("select count(*) from comment where pid = #{pid}")
     int selectCountByPid(int pid);
+
+    @Select("select create_date from comment where pid = #{pid} order by create_date desc limit 1")
+    Date selectLastCommentDate(int pid);
+
 }

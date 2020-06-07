@@ -67,6 +67,11 @@ public class PostController {
             post.setUser(postUser);
             post.setCommentCount(commentMapper.selectCountByPid(post.getId()));
 
+            //设置更新时间
+            Date updateDate = commentMapper.selectLastCommentDate(post.getId());
+            updateDate = (updateDate == null) ? post.getCreate_date() : updateDate;
+            post.setUpdate_date(updateDate);
+
             //postList中每个post只用显示前50个字, 点进post才显示完整内容
             int sliceCount = 50;
             String contentSlice = post.getContent().length() > sliceCount ? post.getContent().substring(0, sliceCount) :

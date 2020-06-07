@@ -1,4 +1,4 @@
-package com.ftt.forum;
+package com.ftt.forum.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
