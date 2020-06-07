@@ -16,8 +16,4 @@ public class PageController {
         return "login";
     }
 
-    @GetMapping("/index")
-    public String index() {
-        return "index";
-    }
 }
