@@ -27,8 +27,8 @@
             <tr th:each="post: ${posts}">
                 <td><a th:text="${post.user.name}" th:href="@{'/userinfo?uid=' + ${post.user.id}}"></a> </td>
                 <td><a th:text="${post.content}" th:href="@{'/commentList?pid=' + ${post.id}}"></a></td>
-                <td th:text="${#dates.format(post.create_date, 'dd/MM/yyyy HH:mm')}"></td>
-                <td th:text="${#dates.format(post.update_date, 'dd/MM/yyyy HH:mm')}"></td>
+                <td th:text="${#dates.format(post.create_date, 'yyyy/MM/dd HH: mm')}"></td>
+                <td th:text="${#dates.format(post.update_date, 'yyyy/MM/dd HH: mm')}"></td>
                 <td th:text="${post.commentCount}"></td>
             </tr>
         </tbody>

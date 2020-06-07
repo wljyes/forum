@@ -6,16 +6,16 @@
     <title th:text="|Post ${post.id}|"></title>
 </head>
 <body>
-    <h2><a th:text="${post.user.name}" th:href="@{'/userinfo?uid=' + ${post.user.id}}"></a> </h2>
+    <h2><a th:text="|发帖者: ${post.user.name}|" th:href="@{'/userinfo?uid=' + ${post.user.id}}"></a> </h2>
     <h2 th:text="${post.content}"></h2>
+---------------------------------------------------------------------
     <span><a th:href="@{'/addCollect?pid=' + ${post.id}}">加入收藏</a> </span>
-------------------------------------------------------------
     <div id="commentList">
         <table>
             <tr th:each="comment: ${comments}">
                 <td><a th:text="${comment.user.name}" th:href="@{'/userinfo?uid=' + ${comment.uid}}"></a> </td>
                 <td th:text="${comment.content}"></td>
-                <td th:text="${comment.create_date}"></td>
+                <td th:text="${#dates.format(comment.create_date, 'yyyy/MM/dd HH: mm')}"></td>
                 <td th:if="${session.user.id == comment.user.id}"><a th:href="@{'/uncomment?id=' + ${comment.id} + '&pid=' + ${post.id}}">取消评论</a> </td>
             </tr>
         </table>
