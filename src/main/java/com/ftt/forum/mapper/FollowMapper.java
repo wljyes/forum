@@ -22,4 +22,10 @@ public interface FollowMapper {
 
     @Select("select * from follow where follower_id = #{follower_id}")
     List<Follow> selectByFollowerId(int follower_id);
+
+    @Select("select * from follow where uid = #{uid} and follower_id = #{followId}")
+    Follow selectByUidAndFollowId(int uid, int followId);
+
+    @Delete("delete from follow where uid = #{uid} and follower_id = #{followId}")
+    void deleteByUidAndFollowId(int uid, int followId);
 }

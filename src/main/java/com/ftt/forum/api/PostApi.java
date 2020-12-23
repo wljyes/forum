@@ -38,7 +38,6 @@ public class PostApi {
         post.setContent(content);
         Date now = new Date();
         post.setCreate_date(now);
-        post.setUpdate_date(now);
 
         postMapper.insert(post);
         return Response.success().append("msg", "发表成功！");
@@ -83,5 +82,9 @@ public class PostApi {
     public void fill(Post post, User poster) {
         post.setUser(poster);
         post.setCommentCount(commentMapper.selectCountByPid(post.getId()));
+        Date updateDate = commentMapper.selectLastCommentDate(post.getId());
+        if (updateDate == null)
+            updateDate = post.getCreate_date();
+        post.setUpdate_date(updateDate);
     }
 }
