@@ -16,7 +16,7 @@
                 <td><a th:text="${comment.user.username}" th:href="@{'/userinfo?uid=' + ${comment.uid}}"></a> </td>
                 <td th:text="${comment.content}"></td>
                 <td th:text="${#dates.format(comment.create_date, 'yyyy/MM/dd HH: mm')}"></td>
-                <td th:if="${session.user.id == comment.user.id}"><a th:href="@{'/uncomment?id=' + ${comment.id} + '&pid=' + ${post.id}}">取消评论</a> </td>
+                <td th:if="${session.userId == comment.user.id}"><a th:href="@{'/uncomment?id=' + ${comment.id} + '&pid=' + ${post.id}}">取消评论</a> </td>
             </tr>
         </table>
     </div>

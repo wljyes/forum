@@ -8,19 +8,19 @@ import org.springframework.stereotype.Repository;
 public interface UserMapper {
 
     @Options(useGeneratedKeys = true, keyProperty = "id")
-    @Insert("insert into user (name, password) values (#{name}, #{password})")
+    @Insert("insert into user (username, password) values (#{username}, #{password})")
     void insert(User user);
 
     @Delete("delete from user where id = #{id}")
     void delete(Integer id);
 
-    @Update("update user set name = #{name}, password = #{password} where id = #{id}")
+    @Update("update user set username = #{username}, password = #{password} where id = #{id}")
     void update(User user);
 
-    @Select("select id, name, password from user where id = #{id}")
+    @Select("select id, username, password from user where id = #{id}")
     User selectById(Integer id);
 
-    @Select("select * from user where name = #{name}")
-    User selectByName(String name);
+    @Select("select * from user where username = #{name}")
+    User selectByName(String username);
 
 }
