@@ -42,7 +42,7 @@ public class UserController {
         User user = userMapper.selectByName(name);
         if (user == null) {
             user = new User();
-            user.setName(name);
+            user.setUsername(name);
             user.setPassword(password);
             userMapper.insert(user);
             return "redirect:/login";

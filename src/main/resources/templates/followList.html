@@ -17,7 +17,7 @@
         </thead>
         <tbody>
         <tr th:each="follow: ${follows}">
-            <td><a th:text="${follow.follower.name}" th:href="@{'/userinfo?uid=' + ${follow.follower_id}}"></a> </td>
+            <td><a th:text="${follow.follower.username}" th:href="@{'/userinfo?uid=' + ${follow.follower_id}}"></a> </td>
             <td><button><a th:href="@{'/unfollow?id=' + ${follow.id}}">取消关注</a></button></td>
         </tr>
         </tbody>

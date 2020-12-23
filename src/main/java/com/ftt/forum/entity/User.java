@@ -2,8 +2,16 @@ package com.ftt.forum.entity;
 
 public class User {//用户
     private Integer id;
-    private String name;
+    private String username;
     private String password;
+
+    public User() {
+    }
+
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
 
     public Integer getId() {
         return id;
@@ -13,12 +21,12 @@ public class User {//用户
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {

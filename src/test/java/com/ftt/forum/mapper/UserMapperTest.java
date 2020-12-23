@@ -16,7 +16,7 @@ class UserMapperTest {
     @Test
     void insert() {
         User user = new User();
-        user.setName("test");
+        user.setUsername("test");
         user.setPassword("test");
         userMapper.insert(user);
         assertNotNull(user.getId());

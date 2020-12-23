@@ -16,7 +16,7 @@
         </thead>
         <tbody>
         <tr th:each="follow: ${follows}">
-            <td><a th:text="${follow.user.name}" th:href="@{'/userinfo?uid=' + ${follow.uid}}"></a> </td>
+            <td><a th:text="${follow.user.username}" th:href="@{'/userinfo?uid=' + ${follow.uid}}"></a> </td>
         </tr>
         </tbody>
     </table>

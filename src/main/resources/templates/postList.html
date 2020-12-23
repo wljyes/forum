@@ -7,7 +7,7 @@
 </head>
 <body>
 <div id="user-panel">
-    <h2>Hi, <a th:href="@{'/userinfo?uid=' + ${user.id}}" th:text="${user.name}"></a> </h2>
+    <h2>Hi, <a th:href="@{'/userinfo?uid=' + ${user.id}}" th:text="${user.username}"></a> </h2>
     <h2><a th:href="@{'/followList'}">我关注了谁</a> </h2>
     <h2><a href="/followerList">谁关注了我</a> </h2>
     <h2><a href="/collectList">我的收藏</a></h2>
@@ -25,7 +25,7 @@
         </thead>
         <tbody>
             <tr th:each="post: ${posts}">
-                <td><a th:text="${post.user.name}" th:href="@{'/userinfo?uid=' + ${post.user.id}}"></a> </td>
+                <td><a th:text="${post.user.username}" th:href="@{'/userinfo?uid=' + ${post.user.id}}"></a> </td>
                 <td><a th:text="${post.content}" th:href="@{'/commentList?pid=' + ${post.id}}"></a></td>
                 <td th:text="${#dates.format(post.create_date, 'yyyy/MM/dd HH: mm')}"></td>
                 <td th:text="${#dates.format(post.update_date, 'yyyy/MM/dd HH: mm')}"></td>

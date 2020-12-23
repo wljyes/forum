@@ -34,8 +34,8 @@ CREATE TABLE `post`  (
 
 CREATE TABLE `User`  (
   `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NULL DEFAULT NULL,
-  `password` varchar(255) NULL DEFAULT NULL,
+  `name` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 );
 
