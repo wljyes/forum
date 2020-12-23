@@ -2,8 +2,10 @@ package com.ftt.forum.api;
 
 import com.ftt.forum.dto.PostResponse;
 import com.ftt.forum.dto.Response;
+import com.ftt.forum.entity.Collect;
 import com.ftt.forum.entity.Post;
 import com.ftt.forum.entity.User;
+import com.ftt.forum.mapper.CollectMapper;
 import com.ftt.forum.mapper.CommentMapper;
 import com.ftt.forum.mapper.PostMapper;
 import com.ftt.forum.mapper.UserMapper;
@@ -20,11 +22,13 @@ import java.util.List;
 @RestController
 public class PostApi {
 
+    private final CollectMapper collectMapper;
     private final PostMapper postMapper;
     private final UserMapper userMapper;
     private final CommentMapper commentMapper;
 
-    public PostApi(PostMapper postMapper, UserMapper userMapper, CommentMapper commentMapper) {
+    public PostApi(CollectMapper collectMapper, PostMapper postMapper, UserMapper userMapper, CommentMapper commentMapper) {
+        this.collectMapper = collectMapper;
         this.postMapper = postMapper;
         this.userMapper = userMapper;
         this.commentMapper = commentMapper;
@@ -74,6 +78,19 @@ public class PostApi {
         List<Post> posts = postMapper.selectByUid(uid);
         for (Post post : posts) {
             fill(post, user);
+            responses.add(PostResponse.of(post));
+        }
+        return Response.success().append("posts", responses);
+    }
+
+    @GetMapping("/api/collect")
+    public Response getCollects(HttpSession session) {
+        int uid = (int) session.getAttribute("userId");
+        List<PostResponse> responses = new ArrayList<>();
+        for (Collect collect : collectMapper.selectByUid(uid)) {
+            Post post = postMapper.selectById(collect.getPid());
+            User poster = userMapper.selectById(post.getUid());
+            fill(post, poster);
             responses.add(PostResponse.of(post));
         }
         return Response.success().append("posts", responses);
