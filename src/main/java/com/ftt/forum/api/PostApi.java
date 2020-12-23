@@ -35,7 +35,7 @@ public class PostApi {
     }
 
     @PostMapping("/api/post")
-    public Response addPost(String content, HttpSession session) {
+    public Response<String> addPost(String content, HttpSession session) {
         Post post = new Post();
         int uid = (int) session.getAttribute("userId");
         post.setUid(uid);
@@ -48,7 +48,7 @@ public class PostApi {
     }
 
     @GetMapping("/api/post")
-    public Response getAllPost() {
+    public Response<List<PostResponse>> getAllPost() {
         List<PostResponse> postResponses = new ArrayList<>();
 
         List<Post> posts = postMapper.selectList();
@@ -63,7 +63,7 @@ public class PostApi {
     }
 
     @GetMapping("/api/post/{pid}")
-    public Response getPost(@PathVariable("pid") int pid) {
+    public Response<PostResponse> getPost(@PathVariable("pid") int pid) {
         Post post = postMapper.selectById(pid);
         User poster = userMapper.selectById(post.getUid());
         fill(post, poster);
@@ -72,7 +72,7 @@ public class PostApi {
     }
 
     @GetMapping("/api/{uid}/post")
-    public Response getUserPosts(@PathVariable("uid") int uid) {
+    public Response<List<PostResponse>> getUserPosts(@PathVariable("uid") int uid) {
         User user = userMapper.selectById(uid);
         List<PostResponse> responses = new ArrayList<>();
         List<Post> posts = postMapper.selectByUid(uid);
@@ -84,7 +84,7 @@ public class PostApi {
     }
 
     @GetMapping("/api/collect")
-    public Response getCollects(HttpSession session) {
+    public Response<List<PostResponse>> getCollects(HttpSession session) {
         int uid = (int) session.getAttribute("userId");
         List<PostResponse> responses = new ArrayList<>();
         for (Collect collect : collectMapper.selectByUid(uid)) {

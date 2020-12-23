@@ -2,9 +2,13 @@ package com.ftt.forum.dto;
 
 import com.ftt.forum.entity.User;
 
+import java.util.Optional;
+
 public class UserResponse {
-    public final int id;
-    public final String username;
+    public int id = -1;
+    public String username = "";
+
+    public UserResponse() {}
 
     public UserResponse(int id, String username) {
         this.id = id;
@@ -12,6 +16,11 @@ public class UserResponse {
     }
 
     public static UserResponse of(User user) {
-        return new UserResponse(user.getId(), user.getUsername());
+        UserResponse response = new UserResponse();
+        Optional.ofNullable(user).ifPresent(u -> {
+            response.id = u.getId();
+            response.username = u.getUsername();
+        });
+        return response;
     }
 }

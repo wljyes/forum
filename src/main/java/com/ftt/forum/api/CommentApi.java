@@ -29,7 +29,7 @@ public class CommentApi {
     }
 
     @PostMapping("/api/{pid}/comment")
-    public Response addComment(@PathVariable("pid") int pid, String content, HttpSession session) {
+    public Response<String> addComment(@PathVariable("pid") int pid, String content, HttpSession session) {
         int uid = (int) session.getAttribute("userId");
         Comment comment = new Comment();
         comment.setUid(uid);
@@ -43,7 +43,7 @@ public class CommentApi {
     }
 
     @GetMapping("/api/{pid}/comment")
-    public Response getComments(@PathVariable("pid") int pid) {
+    public Response<List<CommentResponse>> getComments(@PathVariable("pid") int pid) {
         List<CommentResponse> responses = new ArrayList<>();
         for (Comment comment : commentMapper.select(pid)) {
             User user = userMapper.selectById(comment.getUid());

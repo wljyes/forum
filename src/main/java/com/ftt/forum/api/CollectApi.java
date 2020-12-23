@@ -17,7 +17,7 @@ public class CollectApi {
     }
 
     @PostMapping("/api/collect")
-    public Response addCollect(int pid, HttpSession session) {
+    public Response<String> addCollect(int pid, HttpSession session) {
         int uid = (int) session.getAttribute("userId");
         Collect collect = new Collect();
         collect.setUid(uid);
@@ -28,7 +28,7 @@ public class CollectApi {
     }
 
     @DeleteMapping("/api/collect/{pid}")
-    public Response uncollect(@PathVariable("pid") int pid, HttpSession session) {
+    public Response<String> uncollect(@PathVariable("pid") int pid, HttpSession session) {
         int uid = (int) session.getAttribute("userId");
         collectMapper.deleteByUidAndPid(uid, pid);
         return Response.success("");

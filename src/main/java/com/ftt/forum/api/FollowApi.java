@@ -24,7 +24,7 @@ public class FollowApi {
     }
 
     @GetMapping("/api/follow")
-    public Response getFollows(HttpSession session) {
+    public Response<List<UserResponse>> getFollows(HttpSession session) {
         int uid = (int) session.getAttribute("userId");
         List<Follow> follows = followMapper.selectByUid(uid);
         List<UserResponse> followers = new ArrayList<>();
@@ -36,11 +36,11 @@ public class FollowApi {
     }
 
     @PostMapping("/api/follow")
-    public Response follow(int followId, HttpSession session) {
+    public Response<String> follow(int followId, HttpSession session) {
         int uid = (int) session.getAttribute("userId");
         Follow follow = followMapper.selectByUidAndFollowId(uid, followId);
         if (follow != null) {
-            return Response.fail("已经关注过！");
+            return Response.fail("", "已经关注过！");
         }
         Follow newFollow = new Follow();
         newFollow.setUid(uid);
@@ -51,7 +51,7 @@ public class FollowApi {
     }
 
     @DeleteMapping("/api/follow/{followId}")
-    public Response unfollow(@PathVariable("followId") int followId, HttpSession session) {
+    public Response<String> unfollow(@PathVariable("followId") int followId, HttpSession session) {
         int uid = (int) session.getAttribute("userId");
         followMapper.deleteByUidAndFollowId(uid, followId);
         return Response.success("取关成功！");

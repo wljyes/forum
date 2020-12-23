@@ -1,16 +1,15 @@
 package com.ftt.forum.dto;
 
-import java.util.HashMap;
-import java.util.Map;
-
-public class Response {
+public class Response<T> {
     private final Object data;
     private final int code;
+    private final String message;
 
 
-    public Response(Object data, Status status) {
+    public Response(Object data, Status status, String message) {
         this.data = data;
         this.code = status.code;
+        this.message = message;
     }
 
     public Object getData() {
@@ -21,13 +20,16 @@ public class Response {
         return code;
     }
 
-
-    public static Response success(Object data) {
-        return new Response(data, Status.SUCCESS);
+    public String getMessage() {
+        return message;
     }
 
-    public static Response fail(Object error) {
-        return new Response(error, Status.FAIL);
+    public static <T> Response<T> success(T data) {
+        return new Response<>(data, Status.SUCCESS, "success");
+    }
+
+    public static <T> Response<T> fail(T emptyData, String errorMsg) {
+        return new Response<>(emptyData, Status.FAIL, errorMsg);
     }
 
     public static enum Status {
