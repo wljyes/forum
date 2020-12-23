@@ -30,7 +30,7 @@ public class UserApi {
         if (!user.getPassword().equals(password))
             return Response.fail("用户名或密码错误！");
         session.setAttribute("userId", user.getId());
-        return Response.success().append("msg", "登陆成功");
+        return Response.success("登录成功");
     }
 
     @PostMapping("/api/signup")
@@ -48,12 +48,12 @@ public class UserApi {
             return Response.fail("用户名已存在！");
 
         userMapper.insert(new User(username, password));
-        return Response.success().append("msg", "注册成功");
+        return Response.success("注册成功");
     }
 
     @GetMapping("/api/userinfo/{uid}")
     public Response userinfo(@PathVariable("uid") int uid) {
         User user = userMapper.selectById(uid);
-        return Response.success().append("user", UserResponse.of(user));
+        return Response.success(UserResponse.of(user));
     }
 }

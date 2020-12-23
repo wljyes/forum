@@ -44,7 +44,7 @@ public class PostApi {
         post.setCreate_date(now);
 
         postMapper.insert(post);
-        return Response.success().append("msg", "发表成功！");
+        return Response.success("发表成功！");
     }
 
     @GetMapping("/api/post")
@@ -59,7 +59,7 @@ public class PostApi {
 
             postResponses.add(PostResponse.of(post));
         }
-        return Response.success().append("posts", postResponses);
+        return Response.success(postResponses);
     }
 
     @GetMapping("/api/post/{pid}")
@@ -68,7 +68,7 @@ public class PostApi {
         User poster = userMapper.selectById(post.getUid());
         fill(post, poster);
 
-        return Response.success().append("post", PostResponse.of(post));
+        return Response.success(PostResponse.of(post));
     }
 
     @GetMapping("/api/{uid}/post")
@@ -80,7 +80,7 @@ public class PostApi {
             fill(post, user);
             responses.add(PostResponse.of(post));
         }
-        return Response.success().append("posts", responses);
+        return Response.success(responses);
     }
 
     @GetMapping("/api/collect")
@@ -93,7 +93,7 @@ public class PostApi {
             fill(post, poster);
             responses.add(PostResponse.of(post));
         }
-        return Response.success().append("posts", responses);
+        return Response.success(responses);
     }
 
     public void fill(Post post, User poster) {

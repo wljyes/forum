@@ -32,7 +32,7 @@ public class FollowApi {
             User follower = userMapper.selectById(follow.getFollower_id());
             followers.add(UserResponse.of(follower));
         }
-        return Response.success().append("users", followers);
+        return Response.success(followers);
     }
 
     @PostMapping("/api/follow")
@@ -47,13 +47,13 @@ public class FollowApi {
         newFollow.setFollower_id(followId);
         newFollow.setFollow_date(new Date());
         followMapper.insert(newFollow);
-        return Response.success().append("msg", "关注成功！");
+        return Response.success("关注成功！");
     }
 
     @DeleteMapping("/api/follow/{followId}")
     public Response unfollow(@PathVariable("followId") int followId, HttpSession session) {
         int uid = (int) session.getAttribute("userId");
         followMapper.deleteByUidAndFollowId(uid, followId);
-        return Response.success().append("msg", "取关成功！");
+        return Response.success("取关成功！");
     }
 }

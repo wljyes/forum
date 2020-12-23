@@ -8,7 +8,6 @@ import com.ftt.forum.entity.User;
 import com.ftt.forum.mapper.CommentMapper;
 import com.ftt.forum.mapper.PostMapper;
 import com.ftt.forum.mapper.UserMapper;
-import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,7 +39,7 @@ public class CommentApi {
         comment.setCreate_date(now);
 
         commentMapper.insert(comment);
-        return Response.success();
+        return Response.success("");
     }
 
     @GetMapping("/api/{pid}/comment")
@@ -50,6 +49,6 @@ public class CommentApi {
             User user = userMapper.selectById(comment.getUid());
             responses.add(CommentResponse.of(comment));
         }
-        return Response.success().append("comments", responses);
+        return Response.success(responses);
     }
 }

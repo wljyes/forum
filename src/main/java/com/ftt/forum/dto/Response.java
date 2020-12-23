@@ -4,22 +4,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Response {
-    private final Map<String, Object> data;
+    private final Object data;
     private final int code;
-    private final String error;
 
 
-    public Response(Map<String, Object> data, Status status, String error) {
+    public Response(Object data, Status status) {
         this.data = data;
         this.code = status.code;
-        this.error = error;
     }
 
-    public String getError() {
-        return error;
-    }
-
-    public Map<String, Object> getData() {
+    public Object getData() {
         return data;
     }
 
@@ -27,17 +21,13 @@ public class Response {
         return code;
     }
 
-    public Response append(String key, Object value) {
-        this.data.put(key, value);
-        return this;
+
+    public static Response success(Object data) {
+        return new Response(data, Status.SUCCESS);
     }
 
-    public static Response success() {
-        return new Response(new HashMap<>(), Status.SUCCESS, null);
-    }
-
-    public static Response fail(String error) {
-        return new Response(new HashMap<>(), Status.FAIL, error);
+    public static Response fail(Object error) {
+        return new Response(error, Status.FAIL);
     }
 
     public static enum Status {
