@@ -1,18 +1,18 @@
 package com.ftt.forum.dto;
 
 public class Response<T> {
-    private final Object data;
+    private final T data;
     private final int code;
     private final String message;
 
 
-    public Response(Object data, Status status, String message) {
+    public Response(T data, Status status, String message) {
         this.data = data;
         this.code = status.code;
         this.message = message;
     }
 
-    public Object getData() {
+    public T getData() {
         return data;
     }
 
