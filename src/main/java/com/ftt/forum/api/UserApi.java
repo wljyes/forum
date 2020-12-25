@@ -5,10 +5,7 @@ import com.ftt.forum.dto.UserResponse;
 import com.ftt.forum.entity.Post;
 import com.ftt.forum.entity.User;
 import com.ftt.forum.mapper.UserMapper;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -56,5 +53,35 @@ public class UserApi {
     public Response<UserResponse> userinfo(@PathVariable("uid") int uid) {
         User user = userMapper.selectById(uid);
         return Response.success(UserResponse.of(user));
+    }
+
+    @GetMapping("/api/userinfo")
+    public Response<UserResponse> userinfo(HttpSession session) {
+        User user = userMapper.selectById((Integer) session.getAttribute("userId"));
+        return Response.success(UserResponse.of(user));
+    }
+
+    @PutMapping("/api/user/username")
+    public Response<UserResponse> changeName(String newUsername, HttpSession session) {
+        int uid = (int) session.getAttribute("userId");
+        User user = userMapper.selectById(uid);
+        user.setUsername(newUsername);
+        userMapper.update(user);
+        return Response.success(UserResponse.of(user));
+    }
+
+    @PutMapping("/api/user/password")
+    public Response<UserResponse> changePassword(String newPassword, HttpSession session) {
+        int uid = (int) session.getAttribute("userId");
+        User user = userMapper.selectById(uid);
+        user.setPassword(newPassword);
+        userMapper.update(user);
+        return Response.success(UserResponse.of(user));
+    }
+
+    @GetMapping("/api/user/logout")
+    public Response<String> logout(HttpSession session) {
+        session.invalidate();
+        return Response.success("success");
     }
 }
