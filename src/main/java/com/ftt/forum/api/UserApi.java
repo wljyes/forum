@@ -30,6 +30,7 @@ public class UserApi {
         if (!user.getPassword().equals(password))
             return Response.fail("", "用户名或密码错误！");
         session.setAttribute("userId", user.getId());
+        session.setAttribute("username", user.getUsername());
         return Response.success("登录成功");
     }
 

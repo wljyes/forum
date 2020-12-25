@@ -28,9 +28,10 @@ public class CommentApi {
         this.userMapper = userMapper;
     }
 
-    @PostMapping("/api/{pid}/comment")
-    public Response<String> addComment(@PathVariable("pid") int pid, String content, HttpSession session) {
+    @PostMapping("/api/post/{pid}/comment")
+    public Response<CommentResponse> addComment(@PathVariable("pid") int pid, String content, HttpSession session) {
         int uid = (int) session.getAttribute("userId");
+        String username = (String) session.getAttribute("username");
         Comment comment = new Comment();
         comment.setUid(uid);
         comment.setPid(pid);
@@ -39,14 +40,18 @@ public class CommentApi {
         comment.setCreate_date(now);
 
         commentMapper.insert(comment);
-        return Response.success("");
+        User user = new User(username, "");
+        user.setId(uid);
+        comment.setUser(user);
+        return Response.success(CommentResponse.of(comment));
     }
 
-    @GetMapping("/api/{pid}/comment")
+    @GetMapping("/api/post/{pid}/comment")
     public Response<List<CommentResponse>> getComments(@PathVariable("pid") int pid) {
         List<CommentResponse> responses = new ArrayList<>();
         for (Comment comment : commentMapper.select(pid)) {
             User user = userMapper.selectById(comment.getUid());
+            comment.setUser(user);
             responses.add(CommentResponse.of(comment));
         }
         return Response.success(responses);

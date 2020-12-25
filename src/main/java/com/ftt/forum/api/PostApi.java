@@ -35,16 +35,19 @@ public class PostApi {
     }
 
     @PostMapping("/api/post")
-    public Response<String> addPost(String content, HttpSession session) {
+    public Response<PostResponse> addPost(String content, HttpSession session) {
         Post post = new Post();
         int uid = (int) session.getAttribute("userId");
+        String username = (String) session.getAttribute("username");
         post.setUid(uid);
         post.setContent(content);
         Date now = new Date();
         post.setCreate_date(now);
 
         postMapper.insert(post);
-        return Response.success("发表成功！");
+        post.setUser(new User(uid, username, ""));
+        post.setUpdate_date(now);
+        return Response.success(PostResponse.of(post));
     }
 
     @GetMapping("/api/post")
