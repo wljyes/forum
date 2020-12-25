@@ -27,6 +27,17 @@ public class CollectApi {
         return Response.success("");
     }
 
+    @GetMapping("/api/collect/{pid}")
+    public Response<Boolean> isCollect(@PathVariable("pid") int pid, HttpSession session) {
+        int uid = (int) session.getAttribute("userId");
+        Collect collect = collectMapper.selectByUidAndPid(uid, pid);
+        if (collect == null) {
+            return Response.success(false);
+        } else {
+            return Response.success(true);
+        }
+    }
+
     @DeleteMapping("/api/collect/{pid}")
     public Response<String> uncollect(@PathVariable("pid") int pid, HttpSession session) {
         int uid = (int) session.getAttribute("userId");
