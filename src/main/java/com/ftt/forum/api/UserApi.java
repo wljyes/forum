@@ -20,15 +20,15 @@ public class UserApi {
     }
 
     @PostMapping("/api/signin")
-    public Response<String> signin(String username, String password, HttpSession session) {
+    public Response<UserResponse> signin(String username, String password, HttpSession session) {
         User user = userMapper.selectByName(username);
         if (user == null)
-            return Response.fail("", "用户不存在！");
+            return Response.fail(null, "用户不存在！");
         if (!user.getPassword().equals(password))
-            return Response.fail("", "用户名或密码错误！");
+            return Response.fail(null, "用户名或密码错误！");
         session.setAttribute("userId", user.getId());
         session.setAttribute("username", user.getUsername());
-        return Response.success("登录成功");
+        return Response.success(UserResponse.of(user));
     }
 
     @PostMapping("/api/signup")
